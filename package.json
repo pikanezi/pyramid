@@ -6,9 +6,14 @@
 	"engines": {
 		"vscode": "^1.56.0"
 	},
+	"publisher": "vincentneel",
 	"categories": [
 		"Other"
 	],
+	"repository": {
+		"url": "https://github.com/pikanezi/pyramid"
+	},
+	"license": "MIT",
 	"activationEvents": [
         "onCommand:pyramidscheme.buildPyramid"
 	],
