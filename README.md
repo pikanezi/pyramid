@@ -2,4 +2,6 @@
 
 A simple extension to format using an in-house format: the pyramid scheme.
 
+![](presentation.gif)
+
 **Enjoy!**
