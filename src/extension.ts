@@ -2,17 +2,21 @@ import {EOL} from 'os';
 
 import {commands, ExtensionContext, window} from 'vscode';
 
-type StringKind = 'text' | 'import' | 'importType' | 'declaration';
+type StringKind = 'text' | 'import' | 'importType' | 'declaration' | 'colonDeclaration';
 
 const describeString = (str: string): StringKind => {
     const colonCount = (str.match(/:/) || []).length;
     const questionMarkCount = (str.match(/\?/) || []).length;
+    const isColonDeclaration =  colonCount > questionMarkCount;
 
     const equalPosition = str.indexOf('=');
-    const isDeclaration = (equalPosition !== -1 && str.charAt(equalPosition + 1) !== '=') || colonCount > questionMarkCount;
+    const isDeclaration = (equalPosition !== -1 && str.charAt(equalPosition + 1) !== '=');
 
     if (isDeclaration) {
         return 'declaration';
+    }
+    if (isColonDeclaration) {
+        return 'colonDeclaration';
     }
     if (str.startsWith('import type')) {
         return 'importType';
@@ -34,6 +38,10 @@ const sort = (a: string, b: string) => {
     if (aKind === 'declaration') {
         str1 = a.split('=')[0].trim();
         str2 = b.split('=')[0].trim();
+    }
+    if (aKind === 'colonDeclaration') {
+        str1 = a.split(':')[0].trim();
+        str2 = b.split(':')[0].trim();
     }
     if (aKind === 'import' || aKind === 'importType') {
         str1 = a.split('from')[0].trim();
