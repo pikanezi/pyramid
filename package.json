@@ -2,7 +2,7 @@
   "name": "pyramidscheme",
   "displayName": "pyramidScheme",
   "description": "For freaks who like to format their Typescript code using the Pyramid Scheme convention.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "engines": {
     "vscode": "^1.56.0"
   },
