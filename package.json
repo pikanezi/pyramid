@@ -11,8 +11,10 @@
     "Other"
   ],
   "repository": {
+    "type": "git",
     "url": "https://github.com/pikanezi/pyramid"
   },
+  "icon": "icon.png",
   "license": "MIT",
   "activationEvents": [
     "onCommand:pyramidscheme.buildPyramid"

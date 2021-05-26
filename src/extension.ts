@@ -90,9 +90,10 @@ export const activate = (context: ExtensionContext) => {
         if (editor) {
             const {document, selection} = editor;
             const textSelected = document.getText(selection);
+            const replcaement = pyramid(textSelected);
 
             editor.edit(builder => {
-                builder.replace(selection, pyramid(textSelected));
+                builder.replace(selection, replcaement);
             });
         }
     });
