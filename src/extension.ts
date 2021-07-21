@@ -29,9 +29,6 @@ const describeString = (str: string): StringKind => {
 
 const sort = (a: string, b: string) => {
     const aKind = describeString(a.trim());
-    if (aKind === 'text') {
-        return 0;
-    }
 
     let str1 = a.trim();
     let str2 = b.trim();
@@ -48,8 +45,11 @@ const sort = (a: string, b: string) => {
         str2 = b.split('from')[0].trim();
     }
 
+    if (str1 === str2) {
+        return 0;
+    }
     if (str1.length === str2.length) {
-        return str1 < str2 ? 1 : -1;
+        return str1 < str2 ? -1 : 1;
     }
     if (str1.length < str2.length) {
         return -1;
@@ -78,7 +78,7 @@ const pyramid = (input: string): string => {
                 shouldAlter = false;
             }
         }
-
+        
         return shouldAlter ? lines.sort(sort).join(EOL) + (input.charAt(input.length - 1) === EOL ? EOL : '') : input;
     }
     return input;
@@ -90,10 +90,10 @@ export const activate = (context: ExtensionContext) => {
         if (editor) {
             const {document, selection} = editor;
             const textSelected = document.getText(selection);
-            const replcaement = pyramid(textSelected);
+            const replacement = pyramid(textSelected);
 
             editor.edit(builder => {
-                builder.replace(selection, replcaement);
+                builder.replace(selection, replacement);
             });
         }
     });
